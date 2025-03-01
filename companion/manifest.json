@@ -1,16 +1,16 @@
 {
-	"id": "your-module-name",
-	"name": "your-module-name",
-	"shortname": "module-shortname",
-	"description": "A short one line description of your module",
+	"id": "zowietek-api",
+	"name": "zowietek-api",
+	"shortname": "zowietek",
+	"description": "Control various Zowietek devices via the common Zowietek API",
 	"version": "0.0.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-your-module-name.git",
-	"bugs": "https://github.com/bitfocus/companion-module-your-module-name/issues",
+	"repository": "git+https://github.com/bitfocus/companion-module-zowietek-api.git",
+	"bugs": "https://github.com/bitfocus/companion-module-your-zowietek-api/issues",
 	"maintainers": [
 		{
-			"name": "Your name",
-			"email": "Your email"
+			"name": "Jens Frank",
+			"email": "jf@mormo.org"
 		}
 	],
 	"runtime": {
@@ -20,7 +20,7 @@
 		"entrypoint": "../main.js"
 	},
 	"legacyIds": [],
-	"manufacturer": "Your company",
-	"products": ["Your product"],
+	"manufacturer": "Zowietek",
+	"products": ["4K PTZ Camera","4K PTZ Camera NDI","SDI NDI Video Streaming Encoder Decoder","4K HDMI NDI Video Encoder/Decoder","Zowiebox","Zowiecam","ZowiePTZ"],
 	"keywords": []
 }

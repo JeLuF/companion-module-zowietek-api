@@ -3,20 +3,22 @@ const UpgradeScripts = require('./upgrades')
 const UpdateActions = require('./actions')
 const UpdateFeedbacks = require('./feedbacks')
 const UpdateVariableDefinitions = require('./variables')
+const zowietekMethods = require('./zowietek')
 
-class ModuleInstance extends InstanceBase {
+class ZowietekModuleInstance extends InstanceBase {
+
+	CHOICES_PRESETS = [{ id: -1, label: 'No presets found'}]
+	CHOICES_STORAGES = [{ id: -1, label: 'No storage found'}]
+
+	connstatus = false
+
 	constructor(internal) {
 		super(internal)
 	}
 
 	async init(config) {
-		this.config = config
-
-		this.updateStatus(InstanceStatus.Ok)
-
-		this.updateActions() // export actions
-		this.updateFeedbacks() // export feedbacks
-		this.updateVariableDefinitions() // export variable definitions
+		Object.assign(ZowietekModuleInstance.prototype, zowietekMethods)
+		this.configUpdated(config)
 	}
 	// When module gets deleted
 	async destroy() {
@@ -25,6 +27,11 @@ class ModuleInstance extends InstanceBase {
 
 	async configUpdated(config) {
 		this.config = config
+
+		await this.getDeviceStatus()
+		this.updateActions() // export actions
+		this.updateFeedbacks() // export feedbacks
+		this.updateVariableDefinitions() // export variable definitions
 	}
 
 	// Return config fields for web config
@@ -34,16 +41,23 @@ class ModuleInstance extends InstanceBase {
 				type: 'textinput',
 				id: 'host',
 				label: 'Target IP',
-				width: 8,
+				width: 12,
 				regex: Regex.IP,
+			},
+/*			{
+				type: 'textinput',
+				id: 'user',
+				label: 'Username',
+				width: 6,
+				default: 'admin',
 			},
 			{
 				type: 'textinput',
-				id: 'port',
-				label: 'Target Port',
-				width: 4,
-				regex: Regex.PORT,
-			},
+				id: 'password',
+				label: 'Password',
+				width: 6,
+				default: 'admin',
+			}, */
 		]
 	}
 
@@ -60,4 +74,4 @@ class ModuleInstance extends InstanceBase {
 	}
 }
 
-runEntrypoint(ModuleInstance, UpgradeScripts)
+runEntrypoint(ZowietekModuleInstance, UpgradeScripts)
